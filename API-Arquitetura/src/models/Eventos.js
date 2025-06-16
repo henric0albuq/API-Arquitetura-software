@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/dbConnection.js';
 
-const Eventos = sequelize.define('Eventos', {
+const Evento = sequelize.define('Evento', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -18,30 +18,35 @@ const Eventos = sequelize.define('Eventos', {
     dataInicio: {
         type: DataTypes.DATE,
         allowNull: false,
+        
     },
     dataFinal: {
         type: DataTypes.DATE,
         allowNull: true,
+        
     },
     idLocal: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        
         references: {
-            model: 'Locais', // Nome da tabela relacionada
-            key: 'id', // Chave primária da tabela relacionada
+            model: 'locais', // nome da tabela no banco (minúsculo por padrão)
+            key: 'id',
         },
     },
     idCategoria: {
         type: DataTypes.INTEGER,
         allowNull: false,
+       
         references: {
-            model: 'Categorias', // Nome da tabela relacionada
-            key: 'id', // Chave primária da tabela relacionada
+            model: 'categorias', // nome da tabela no banco (minúsculo por padrão)
+            key: 'id',
         },
     },
 }, {
     tableName: 'eventos',
     timestamps: false,
+    
 });
 
-export default Eventos;
+export default Evento;

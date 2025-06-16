@@ -28,17 +28,21 @@ class EventosController {
         }
     }
 
-    static cadastrarEvento = async (req, res) => {
-        try{
-            let evento = new eventos(req.body);
+   static cadastrarEvento = async (req, res) => {
+    try {
+        const { nome, descricao, dataInicio, dataFinal, idLocal, idCategoria } = req.body;
+        if (!nome || !descricao || !dataInicio || !idLocal || !idCategoria) {
+            return res.status(400).json({ message: 'Campos obrigatórios: nome, descricao, dataInicio, idLocal, idCategoria' });
+        }
 
-            const eventoResultado = await evento.save();
-            res.status(201).json(eventoResultado.toJSON());
-        }
-        catch (error) {
-            res.status(500).json({ message: 'Erro ao cadastrar evento', error });
-        }
+        let evento = await eventos.create({ nome, descricao, dataInicio, dataFinal, idLocal, idCategoria });
+        res.status(201).json(evento.toJSON());
     }
+    catch (error) {
+        res.status(500).json({ message: 'Erro ao cadastrar evento', error });
+    }
+}
+
 
     static atualizarEvento = async (req, res) => {
         try{

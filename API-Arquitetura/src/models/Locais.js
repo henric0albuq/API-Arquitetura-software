@@ -1,8 +1,8 @@
+
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/dbConnection.js';
 
-
-const Locais = sequelize.define('Locais', {
+const Local = sequelize.define('Local', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -19,10 +19,10 @@ const Locais = sequelize.define('Locais', {
     capacidade: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
+    }
 }, {
     tableName: 'locais',
-    timestamps: false, // Desabilita createdAt e updatedAt
+    timestamps: false,
 });
 
-export default Locais;
+export default Local;

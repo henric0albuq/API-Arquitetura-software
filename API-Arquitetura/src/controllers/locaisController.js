@@ -28,7 +28,8 @@ class LocaisController {
     static cadastrarLocais = async (req, res) => {
         try {
             let local = new locais(req.body);
-
+            const { nome, endereco, capacidade } = req.body;
+            const novoLocal = await Local.create({ nome, endereco, capacidade });
             const locaisResultado = await local.save();
             res.status(201).json(locaisResultado.toJSON());
         } catch (error) {
